@@ -49,7 +49,7 @@ jobs:
           source ./env.sh
           cd $COMPONENT
           terraform init
-          export TF_LOG=INFO
+          export TF_LOG=DEBUG
           terraform plan
 
 
