@@ -30,6 +30,10 @@ jobs:
           echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
           echo "LOCATION: $LOCATION"
           echo "CIDR_BLOCK: $CIDR_BLOCK"
+      - name: azure login
+        uses: Azure/login@v1
+        # with:
+        #   creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: azure account list
         run: az account list
 
