@@ -48,9 +48,11 @@ jobs:
           cd azure
           source ./env.sh
           cd $COMPONENT
-          terraform init
-          export TF_LOG=DEBUG
           az account show --output table
+          terraform init
+          echo "------"
+          export TF_LOG=TRACE
+
           terraform plan
 
 
