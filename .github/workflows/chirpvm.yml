@@ -37,6 +37,7 @@ jobs:
       - name: terraform plan
         run: |
           az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+          az vm list-sizes --location southcentralus --output table
           # pwd
           # ls -la
           export COMPONENT=init
@@ -49,7 +50,7 @@ jobs:
           az account show --output table
           terraform init
           echo "------"
-          export TF_LOG=DEBUG
+          export TF_LOG=INFO
           terraform -v
           terraform plan
 
