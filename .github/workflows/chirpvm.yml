@@ -44,15 +44,15 @@ jobs:
           export COMPONENT=init
           # echo "COMPONENT: $COMPONENT"
           # echo "ENV_NAME: ${ENV_NAME}"
-          echo $ARM_CLIENT_SECRET
+          echo "TENANT_ID: ${ARM_TENANT_ID}"
           cd azure
           source ./env.sh
           cd $COMPONENT
           az account show --output table
           terraform init
           echo "------"
-          export TF_LOG=TRACE
-
+          export TF_LOG=DEBUG
+          terraform -v
           terraform plan
 
 
