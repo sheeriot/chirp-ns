@@ -51,7 +51,7 @@ jobs:
           ls -la
           cd azure
           ls -la
-          ./terraform_runner.sh init apply
+          ./terraform_runner.sh azure init apply
 
   # terraform-init:
   #   runs-on: ubuntu-latest
