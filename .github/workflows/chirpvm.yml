@@ -36,21 +36,15 @@ jobs:
 
       - name: terraform plan
         run: |
-          # az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
-          az vm list-sizes --location southcentralus --output table
-          # pwd
-          # ls -la
           export COMPONENT=init
-          # echo "COMPONENT: $COMPONENT"
-          # echo "ENV_NAME: ${ENV_NAME}"
-          # echo "TENANT_ID: ${ARM_TENANT_ID}"
           cd azure
           source ./env.sh
           cd $COMPONENT
           terraform init
           echo "------"
           export TF_LOG=INFO
-          terraform plan -input=false
+          terraform validate
+          terraform plan
 
   # terraform-init:
   #   runs-on: ubuntu-latest
