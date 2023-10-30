@@ -40,6 +40,7 @@ jobs:
           export COMPONENT=init
           echo "COMPONENT: $COMPONENT"
           echo "ENV_NAME: ${ENV_NAME}"
+          cd azure
           source ./env.sh
 
 
