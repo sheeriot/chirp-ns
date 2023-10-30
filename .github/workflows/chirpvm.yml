@@ -33,15 +33,17 @@ jobs:
           echo "CIDR_BLOCK: $CIDR_BLOCK"
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: look around
+      - name: terraform plan
         run: |
-          pwd
-          ls -la
+          # pwd
+          # ls -la
           export COMPONENT=init
-          echo "COMPONENT: $COMPONENT"
-          echo "ENV_NAME: ${ENV_NAME}"
+          # echo "COMPONENT: $COMPONENT"
+          # echo "ENV_NAME: ${ENV_NAME}"
+          echo $ARM_CLIENT_SECRET
           cd azure
           source ./env.sh
+          terraform plan
 
 
   # terraform-init:
