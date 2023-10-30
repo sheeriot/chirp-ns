@@ -36,7 +36,7 @@ if [ "$1" = "$foldername" ]; then
     if ! terraform workspace select ${ENV_NAME}; then terraform workspace new ${ENV_NAME}; fi
     
     # terraform validate
-    
+    echo "Now terraform plan/apply/destroy"
     if [ "${3}" = "apply" ]; then
         terraform apply -auto-approve
     elif [ "${3}" = "destroy" ]; then

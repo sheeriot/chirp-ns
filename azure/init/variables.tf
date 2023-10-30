@@ -39,3 +39,18 @@ variable "tfstate_container" {
 #   default = "America/Chicago"
 # }
 
+variable "image_publisher" {
+  type = string
+  description = "Publisher Name on Azure"
+  default = "Canonical"
+}
+variable "image_offer" {
+  type = string
+  description = "Offer Name on Azure"
+  default = "0001-com-ubuntu-server-jammy"
+}
+variable "image_sku" {
+  type = string
+  description = "SKU Name on Azure"
+  default = "22_04-lts-gen2"
+}
