@@ -44,6 +44,7 @@ jobs:
           cd azure
           source ./env.sh
           cd $COMPONENT
+          terraform init
           terraform plan
 
 
