@@ -7,11 +7,10 @@ on:
         description: 'Environment to Deploy'
         type: environment
         required: true
-        default: 'SAND'
 
 env:
-  # ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
-  # ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
   ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   LOCATION: ${{ vars.LOCATION }}
@@ -20,13 +19,10 @@ env:
 jobs:
   check-env:
     runs-on: ubuntu-latest
-    # env:
-    #   ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+    environment: ${{ github.event.inputs.environment }}
+
     steps:
       - name: Echo environment variables
-        env:
-          ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         run: |
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
           echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
