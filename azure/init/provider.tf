@@ -5,7 +5,6 @@ terraform {
       # version = "=3.18.0"
     }
   }
-  backend "local" {}
 }
 provider "azurerm" {
   features {}
