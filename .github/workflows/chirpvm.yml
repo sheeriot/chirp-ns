@@ -42,6 +42,7 @@ jobs:
 
   terraform-init:
     runs-on: ubuntu-latest
+    needs: check-env
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,6 +52,7 @@ jobs:
           ls -la
           cd azure
           ls -la
+          az login
           ./terraform_runner.sh azure init apply
 
   # terraform-init:
