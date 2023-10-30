@@ -43,6 +43,7 @@ jobs:
           echo $ARM_CLIENT_SECRET
           cd azure
           source ./env.sh
+          cd $COMPONENT
           terraform plan
 
 
