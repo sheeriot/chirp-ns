@@ -55,7 +55,6 @@ jobs:
       #     creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Terraform Init
         run: |
-          az account list
           cd azure
           ./terraform_runner.sh azure init plan
 
