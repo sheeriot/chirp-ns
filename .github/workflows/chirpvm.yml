@@ -17,10 +17,10 @@ env:
   CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
 
 jobs:
+
   check-env:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
-
     steps:
       - name: Echo environment variables
         run: |
@@ -30,8 +30,9 @@ jobs:
           echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
           echo "LOCATION: $LOCATION"
           echo "CIDR_BLOCK: $CIDR_BLOCK"
+      - name: azure account list
+        run: az account list
 
-          
   # checkout-code:
   #   runs-on: ubuntu-latest
   #   steps:
