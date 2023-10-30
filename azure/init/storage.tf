@@ -1,7 +1,7 @@
-# resource "azurerm_resource_group" "oam" {
-#   name     = "${var.tfstate_rg}"
-#   location = "${var.location}"
-# }
+resource "azurerm_resource_group" "oam" {
+  name     = "${var.tfstate_rg}"
+  location = "${var.location}"
+}
 # resource "azurerm_storage_account" "tfstate" {
 #   name                     = "${var.tfstate_account}"
 #   resource_group_name      = azurerm_resource_group.oam.name
