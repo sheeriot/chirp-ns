@@ -49,13 +49,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      # - name: Az CLI login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Az CLI login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Terraform Init
         run: |
           az account list --output table
           cd azure
-          ./terraform_runner.sh azure init plan
+          terraform plan
+          # ./terraform_runner.sh azure init plan
 
