@@ -50,6 +50,7 @@ jobs:
           cd $COMPONENT
           terraform init
           export TF_LOG=DEBUG
+          az account show --output table
           terraform plan
 
 
