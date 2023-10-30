@@ -40,19 +40,23 @@ jobs:
       - name: azure account list
         run: az account list --output table
 
-  checkout-code:
+  terraform-init:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - run: ls -lad
-      - run: cd azure
-      - run: ls -lad
-
-  terraform-init:
-    runs-on: ubuntu-latest
-    steps: 
       - name: Terraform Init
         run: |
+          pwd
+          ls -la
           cd azure
+          ls -la
           ./terraform_runner.sh init apply
+
+  # terraform-init:
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #     - name: Terraform Init
+  #       run: |
+  #         cd azure
+  #         ./terraform_runner.sh init apply
