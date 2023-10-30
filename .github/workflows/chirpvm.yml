@@ -45,6 +45,8 @@ jobs:
           source ./env.sh
           cd $COMPONENT
           terraform init
+          export TF_LOG=DEBUG
+          ls -la
           terraform plan
 
 
