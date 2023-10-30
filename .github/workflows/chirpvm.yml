@@ -56,5 +56,5 @@ jobs:
       - name: Terraform Init
         run: |
           cd azure
-          ./terraform_runner.sh azure init apply
+          ./terraform_runner.sh azure init plan
 
