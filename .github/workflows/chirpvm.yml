@@ -33,6 +33,10 @@ jobs:
           echo "CIDR_BLOCK: $CIDR_BLOCK"
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Az CLI login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: terraform plan
         run: |
           # pwd
@@ -45,8 +49,7 @@ jobs:
           source ./env.sh
           cd $COMPONENT
           terraform init
-          export TF_LOG=DEBUG
-          ls -la
+          export TF_LOG=INFO
           terraform plan
 
 
