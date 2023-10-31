@@ -26,7 +26,8 @@ on:
 
 jobs:
 
-  init-tfstate-store:
+  terraform-infra:
+
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     env:
@@ -47,6 +48,8 @@ jobs:
       - name: Check Environment
         run: |
           echo "ENV_NAME: ${ENV_NAME}"
+          echo "TERRAFORM_ACTION: ${TERRAFORM_ACTION}"
+          echo "COMPONENT: $COMPONENT"
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
           echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
           echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
@@ -54,11 +57,6 @@ jobs:
           echo "STATE_SUFFIX: ${STATE_SUFFIX}"
           echo "LOCATION: ${LOCATION}"
           echo "CIDR_BLOCK: $CIDR_BLOCK"
-          echo "TERRAFORM_ACTION: ${action}"
-          echo "COMPONENT: $COMPONENT"
-          echo "ENV_NAME: $ENV_NAME"
-          echo "environment: ${environment}"
-          terraform -v
 
       - name: Checkout Code
         uses: actions/checkout@v3
