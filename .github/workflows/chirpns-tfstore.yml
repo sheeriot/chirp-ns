@@ -9,10 +9,21 @@ on:
         required: true
       action:
         description: 'Terraform Action to Perform'
-        type: string
-        required: true
-        choices: ['plan', 'apply', 'destroy']
-        default: 'plan'
+        type: choice
+        options:
+          - 'init'
+          - 'plan'
+          - 'apply'
+          - 'destroy'
+      component:
+        description: 'Component to Deploy'
+        type: choice
+        options:
+          - 'tfstore'
+          - 'network'
+          - 'compute'
+          - 'app'
+          - 'all'
 
 jobs:
 
