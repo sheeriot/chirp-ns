@@ -18,13 +18,13 @@ export TF_VAR_env_name=$(echo "${ENV_NAME}" | tr '[:upper:]' '[:lower:]')
 echo TF_VAR_env_name: ${TF_VAR_env_name}
 
 # comes from terraform_runner runtime argument
-export COMPONENT = $(echo "${COMPONENT}" | tr '[:upper:]' '[:lower:]')
+export COMPONENT=$(echo "${COMPONENT}" | tr '[:upper:]' '[:lower:]')
 export TF_VAR_component=${COMPONENT}
 echo TF_VAR_component: ${TF_VAR_component}
 
 # clean the statefile suffix to eligible characters only
 STATE_SUFFIX=$(echo $STATE_SUFFIX | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
-echo STATE_SUFFIX
+
 ENV_NAME_STOR=$(echo "${ENV_NAME}" | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 
 # max string length for storage account name is 24 characters
