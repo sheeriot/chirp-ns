@@ -4,7 +4,7 @@
 # Azure Edition
 
 # ------ Infra and Compute Name --------
-export INFRA_NAME=every-chirp-0123456789012345
+export INFRA_NAME=everychirp
 export TF_VAR_infra_name=$(echo "${INFRA_NAME}" | tr '[:upper:]' '[:lower:]')
 export TF_VAR_net_name=$TF_VAR_infra_name
 
