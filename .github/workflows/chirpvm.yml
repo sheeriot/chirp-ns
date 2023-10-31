@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: terraform plan
+      - name: terraform apply
         run: |
           export COMPONENT=init
           cd azure
@@ -44,8 +44,7 @@ jobs:
           terraform init
           echo "------"
           export TF_LOG=INFO
-          terraform validate
-          terraform plan -input=false
+          terraform apply --auto-approve
 
   # terraform-init:
   #   runs-on: ubuntu-latest
