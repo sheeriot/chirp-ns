@@ -17,6 +17,7 @@ echo "Setting up variables for ENV_NAME: ${ENV_NAME}"
 export TF_VAR_env_name=$(echo "${ENV_NAME}" | tr '[:upper:]' '[:lower:]')
 echo TF_VAR_env_name: ${TF_VAR_env_name}
 # comes from terraform_runner runtime argument
+echo "Component: ${COMPONENT}"
 export TF_VAR_component=$(echo "${COMPONENT}" | tr '[:upper:]' '[:lower:]')
 echo TF_VAR_component: ${TF_VAR_component}
 
@@ -43,8 +44,16 @@ echo TF_VAR_component: ${TF_VAR_component}
 
 #TF State - RG, Account, Container
 # STATE_SUFFIX=$(echo "${!STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
+# length of the state suffix
+# remove any non lower case characters or numbers from the state suffix
 
-export TFSTATE_ACCOUNT=$(echo "${INFRA_NAME}${ENV_NAME}${STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
+STATE_SUFFIX_LENGTH=${#STATE_SUFFIX}
+ENV_NAME_LENGTH=${#ENV_NAME}
+INFRA_NAME_MAX=$(expr 24 - $STATE_SUFFIX_LENGTH - $ENV_NAME_LENGTH)
+echo INFRA_NAME_MAX: ${INFRA_NAME_MAX}
+# trucate $INFRA_NAME to 14 characters
+INFRA_NAME_SHORT=$(echo "${INFRA_NAME}" | cut -c1-${INFRA_NAME_MAX})
+export TFSTATE_ACCOUNT=$(echo "${INFRA_NAME_SHORT}${ENV_NAME}${STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
 echo TFSTATE_ACCOUNT: "${TFSTATE_ACCOUNT}"
 export TF_VAR_tfstate_account="${TFSTATE_ACCOUNT}"
 
