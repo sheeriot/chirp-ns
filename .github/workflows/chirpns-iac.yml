@@ -20,9 +20,7 @@ on:
         options:
           - 'tfstore'
           - 'network'
-          - 'compute'
-          - 'app'
-          - 'all'
+          - 'vm0'
 
 jobs:
 
