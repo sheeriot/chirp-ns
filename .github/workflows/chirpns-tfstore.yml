@@ -7,6 +7,12 @@ on:
         description: 'Environment to Deploy'
         type: environment
         required: true
+      action:
+        description: 'Action to Perform'
+        type: string
+        required: true
+        choices: ['plan', 'apply', 'destroy']
+        default: 'plan'
 
 jobs:
 
@@ -21,7 +27,9 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
+
     steps:
+
       # - name: Echo environment variables
       #   run: |
       #     echo "ENV_NAME: $ENV_NAME"
@@ -31,19 +39,16 @@ jobs:
       #     echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
       #     echo "LOCATION: $LOCATION"
       #     echo "CIDR_BLOCK: $CIDR_BLOCK"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: terraform apply
+      - name: terraform apply - init
         env:
           ARM_SKIP_PROVIDER_REGISTRATION: true
         run: |
-          export COMPONENT=init
           cd azure
-          source ./env.sh
-          cd $COMPONENT
-          terraform init
-          echo "------"
-          terraform apply --auto-approve
+          ./terraform_runner.sh azure init $action
+
 
 
