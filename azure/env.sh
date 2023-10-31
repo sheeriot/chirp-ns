@@ -49,6 +49,10 @@ export TF_VAR_tfstate_rg="${TFSTATE_RG}"
 # ARM Access key is used for access to TFState Storage Account
 echo ARM_ACCESS_KEY: ${ARM_ACCESS_KEY}
 
+LOCATION=$(echo "${LOCATION}" | tr -d '[:space:]')
+export TF_VAR_location="${LOCATION}"
+echo TF_VAR_location: ${TF_VAR_location}
+
 CIDR_BLOCK=$(echo "${CIDR_BLOCK}" | tr -d '[:space:]')
 export TF_VAR_cidr_block="${CIDR_BLOCK}"
 echo TF_VAR_cidr_block: ${TF_VAR_cidr_block}

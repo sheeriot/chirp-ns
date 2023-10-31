@@ -8,7 +8,9 @@ variable "owner" {
   default = "DevOps"
 }
 variable "location" {
-  # default = "southcentralus"
+  type       = string
+  description = "Azure Region"
+  # default     = "eastus"
 }
 variable "net_name" {
   type        = string
