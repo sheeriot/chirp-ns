@@ -59,10 +59,10 @@ jobs:
           echo "environment: ${environment}"
           terraform -v
 
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: terraform apply
+      - name: Terraform Action
         env:
           ARM_SKIP_PROVIDER_REGISTRATION: true
         run: |
