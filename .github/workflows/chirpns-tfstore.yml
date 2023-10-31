@@ -8,7 +8,7 @@ on:
         type: environment
         required: true
       action:
-        description: 'Action to Perform'
+        description: 'Terraform Action to Perform'
         type: string
         required: true
         choices: ['plan', 'apply', 'destroy']
@@ -25,20 +25,23 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
       ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
+      STATE_SUFFIX: ${{ vars.STATE_SUFFIX }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
 
     steps:
 
-      # - name: Echo environment variables
-      #   run: |
-      #     echo "ENV_NAME: $ENV_NAME"
-      #     echo "ARM_TENANT_ID: $ARM_TENANT_ID"
-      #     echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
-      #     echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-      #     echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
-      #     echo "LOCATION: $LOCATION"
-      #     echo "CIDR_BLOCK: $CIDR_BLOCK"
+      - name: Echo environment variables
+        run: |
+          echo "ENV_NAME: ${ENV_NAME}"
+          echo "ARM_TENANT_ID: $ARM_TENANT_ID"
+          echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
+          echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
+          echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
+          echo "STATE_SUFFIX: ${STATE_SUFFIX}"
+          echo "LOCATION: ${LOCATION}"
+          echo "CIDR_BLOCK: $CIDR_BLOCK"
 
       - name: Checkout code
         uses: actions/checkout@v3
