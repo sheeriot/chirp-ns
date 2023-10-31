@@ -4,7 +4,7 @@
 # Azure Edition
 
 # ------ Infra and Compute Name --------
-export INFRA_NAME=everychirp
+export INFRA_NAME=every-chirp-0123456789012345
 export TF_VAR_infra_name=$(echo "${INFRA_NAME}" | tr '[:upper:]' '[:lower:]')
 export TF_VAR_net_name=$TF_VAR_infra_name
 
@@ -30,7 +30,7 @@ INFRA_NAME_STOR_MAX=$(expr 24 - $STATE_SUFFIX_LENGTH - ${#ENV_NAME_STOR})
 echo INFRA_NAME_STOR_MAX: ${INFRA_NAME_MAX}
 
 # trucate $INFRA_NAME to 14 characters
-INFRA_NAME_STOR=$(echo "${INFRA_NAME}" | | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
+INFRA_NAME_STOR=$(echo "${INFRA_NAME}" | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 INFRA_NAME_STOR=${INFRA_NAME_STOR:0:$INFRA_NAME_STOR_MAX}
 echo INFRA_NAME_STOR: ${INFRA_NAME_STOR}
 
