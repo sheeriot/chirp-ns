@@ -39,10 +39,11 @@ jobs:
       STATE_SUFFIX: ${{ vars.STATE_SUFFIX }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
+      COMPONENT: ${{ github.event.inputs.component }}
 
     steps:
 
-      - name: Echo environment variables
+      - name: Check Environment
         run: |
           echo "ENV_NAME: ${ENV_NAME}"
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
@@ -52,6 +53,11 @@ jobs:
           echo "STATE_SUFFIX: ${STATE_SUFFIX}"
           echo "LOCATION: ${LOCATION}"
           echo "CIDR_BLOCK: $CIDR_BLOCK"
+          echo "ACTION: $action"
+          echo "COMPONENT: $component"
+          echo "ENVIRONMENT: $ENVIRONMENT"
+          terraform -v
+          az account show --output table
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -61,7 +67,7 @@ jobs:
           ARM_SKIP_PROVIDER_REGISTRATION: true
         run: |
           cd azure
-          ./terraform_runner.sh azure init $action
+          ./terraform_runner.sh azure $component $action
 
 
 
