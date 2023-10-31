@@ -28,7 +28,7 @@ STATE_SUFFIX=$(echo $STATE_SUFFIX | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower
 ENV_NAME_STOR=$(echo "${ENV_NAME}" | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 # max string length for storage account name is 24 characters
 INFRA_NAME_STOR_MAX=$(expr 24 - ${#STATE_SUFFIX} - ${#ENV_NAME_STOR})
-echo INFRA_NAME_STOR_MAX: ${INFRA_NAME_MAX}
+echo INFRA_NAME_STOR_MAX: ${INFRA_NAME_STOR_MAX}
 # clean infra_name for use as storage account prefix
 INFRA_NAME_STOR=$(echo "${INFRA_NAME}" | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 # truncate infra_name to max length for storage acocunt
