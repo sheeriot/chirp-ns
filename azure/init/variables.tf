@@ -14,6 +14,7 @@ variable "location" {
 variable "net_name" {
   type        = string
   description = "Name the Net"
+  default    = "net1"
 }
 variable "env_name" {
   type        = string
@@ -31,11 +32,3 @@ variable "tfstate_container" {
   type        = string
   description = "Blob Container name for TF State Storage"
 }
-# variable "az_count" {
-#   description = "Number of AZs to cover in a given AWS region"
-#   default     = "2"
-# }
-# variable "timezone" {
-#   default = "America/Chicago"
-# }
-
