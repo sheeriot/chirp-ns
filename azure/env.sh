@@ -21,39 +21,20 @@ echo "Component: ${COMPONENT}"
 export TF_VAR_component=$(echo "${COMPONENT}" | tr '[:upper:]' '[:lower:]')
 echo TF_VAR_component: ${TF_VAR_component}
 
-# declare ARM_TENANT_ID_VAR=${ENV_NAME}_ARM_TENANT_ID
-# export ARM_TENANT_ID=${!ARM_TENANT_ID_VAR}
-# echo ARM_TENANT_ID: ${ARM_TENANT_ID}
-
-# declare ARM_SUBSCRIPTION_ID_VAR=${ENV_NAME}_ARM_SUBSCRIPTION_ID
-# export ARM_SUBSCRIPTION_ID=${!ARM_SUBSCRIPTION_ID_VAR}
-# echo ARM_SUBSCRIPTION_ID: ${ARM_SUBSCRIPTION_ID}
-
-# declare ARM_CLIENT_ID_VAR=${ENV_NAME}_ARM_CLIENT_ID
-# export ARM_CLIENT_ID=${!ARM_CLIENT_ID_VAR}
-# echo ARM_CLIENT_ID: ${ARM_CLIENT_ID}
-
-# declare ARM_CLIENT_SECRET_VAR=${ENV_NAME}_ARM_CLIENT_SECRET
-# export ARM_CLIENT_SECRET=${!ARM_CLIENT_SECRET_VAR}
-# echo ARM_CLIENT_SECRET: ${ARM_CLIENT_SECRET}
-
-# declare LOCATION_VAR=${ENV_NAME}_LOCATION
-# export LOCATION=${!LOCATION_VAR}
-# echo LOCATION: ${LOCATION}
-# export TF_VAR_location=$LOCATION
-
-#TF State - RG, Account, Container
-# STATE_SUFFIX=$(echo "${!STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
-# length of the state suffix
-# remove any non lower case characters or numbers from the state suffix
-
+# clean the statefile suffix to eligible characters only
+STATE_SUFFIX=$(echo $STATE_SUFFIX | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 STATE_SUFFIX_LENGTH=${#STATE_SUFFIX}
-ENV_NAME_LENGTH=${#ENV_NAME}
-INFRA_NAME_MAX=$(expr 24 - $STATE_SUFFIX_LENGTH - $ENV_NAME_LENGTH)
-echo INFRA_NAME_MAX: ${INFRA_NAME_MAX}
+
+# max string length for storage account name is 24 characters
+INFRA_NAME_STOR_MAX=$(expr 24 - $STATE_SUFFIX_LENGTH - ${#ENV_NAME_STOR})
+echo INFRA_NAME_STOR_MAX: ${INFRA_NAME_MAX}
+
 # trucate $INFRA_NAME to 14 characters
-INFRA_NAME_SHORT=$(echo "${INFRA_NAME}" | cut -c1-${INFRA_NAME_MAX})
-export TFSTATE_ACCOUNT=$(echo "${INFRA_NAME_SHORT}${ENV_NAME}${STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
+INFRA_NAME_STOR=$(echo "${INFRA_NAME}" | | tr -dc '[:alnum:]' | tr '[:upper:]' '[:lower:]')
+INFRA_NAME_STOR=${INFRA_NAME_STOR:0:$INFRA_NAME_STOR_MAX}
+echo INFRA_NAME_STOR: ${INFRA_NAME_STOR}
+
+export TFSTATE_ACCOUNT=$(echo "${INFRA_NAME_STOR}${ENV_NAME_STOR}${STATE_SUFFIX}")
 echo TFSTATE_ACCOUNT: "${TFSTATE_ACCOUNT}"
 export TF_VAR_tfstate_account="${TFSTATE_ACCOUNT}"
 
