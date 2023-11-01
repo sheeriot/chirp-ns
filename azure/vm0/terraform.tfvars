@@ -9,3 +9,8 @@ ssh_src2name = "Noisy"
 pubkey1_file = "ssh_kt-imac17.pub"
 pubkey2_file = "ssh_kt-mbpro20.pub"
 pubkey3_file = "ssh_kt-noisy.pub"
+
+# VM Image
+image_publisher = "Canonical"
+image_offer = "0001-com-ubuntu-server-jammy"
+image_sku = "22_04-lts-gen2"

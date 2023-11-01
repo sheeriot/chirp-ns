@@ -41,12 +41,12 @@ variable "image_publisher" {
 variable "image_offer" {
   type = string
   description = "Offer Name on Azure"
-  default = "0001-com-ubuntu-minimal-jammy"
+  # default = "0001-com-ubuntu-server-jammy"
 }
 variable "image_sku" {
   type = string
   description = "SKU Name on Azure"
-  default = "minimal-22_04-lts"
+  # default = "22_04-lts-gen2"
 }
 variable "ssh_src1" {
   type = string

@@ -25,8 +25,6 @@ users:
 
 apt:
   sources:
-    deadsnakes-ppa:
-      source: ppa:deadsnakes/ppa
     docker.list:
       source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
@@ -37,7 +35,7 @@ packages:
   - python3-pip
   - docker-ce
   - docker-ce-cli
-  - docker-compose
+  # - docker-compose
 
 runcmd:
   - [ sh, -xc, "echo $(date) ': Begin Cloud-Init runcmd'" ]
