@@ -9,7 +9,7 @@ export TF_VAR_infra_name=$(echo "${INFRA_NAME}" | tr '[:upper:]' '[:lower:]')
 # net_name is set to infra_name for use within Terraform
 export TF_VAR_net_name=$TF_VAR_infra_name
 
-export COMPUTE_NAME=everychirp
+export COMPUTE_NAME=vm0
 export TF_VAR_compute_name=$(echo "${COMPUTE_NAME}" | tr '[:upper:]' '[:lower:]')
 
 # --------------------------------------

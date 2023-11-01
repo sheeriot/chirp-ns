@@ -7,6 +7,14 @@ package_update: true
 package_upgrade: true
 package_reboot_if_required: true
 
+packages:
+  - python3.10
+  - python3.10-venv
+  - python3-pip
+  - docker-ce
+  # - docker-ce-cli
+  # - docker-compose
+
 # Add groups
 groups:
   - devops
@@ -14,6 +22,7 @@ groups:
 
 # Setup Users
 users:
+  - default
   - name: ${username}
     groups: [sudo, adm, docker]
     ssh_authorized_keys:
@@ -29,26 +38,18 @@ apt:
       source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
-packages:
-  - python3.10
-  - python3.10-venv
-  - python3-pip
-  - docker-ce
-  - docker-ce-cli
-  # - docker-compose
-
 runcmd:
   - [ sh, -xc, "echo $(date) ': Begin Cloud-Init runcmd'" ]
   - [ install, -d, -m, 770, -o, ${username}, -g, docker, /opt/docker ]
   - [ runuser, -l, ${username}, -c, 'ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519' ]
-  - [ runuser, -l, ${username}, -c, 'docker network create dashstack_default' ]
+  # - [ runuser, -l, ${username}, -c, 'docker network create dashstack_default' ]
   - [ sh, -xc, "echo $(date) ': End Cloud-Init runcmd'" ]
 
 final_message: ">>  Fini...The system is ready!"
 
 power_state:
-    delay: now
+    delay: "+10"
     mode: reboot
-    message: rebooting
-    timeout: 2
-    condition: true
+    message: Rebooting...
+    timeout: 10
+    # condition: true
