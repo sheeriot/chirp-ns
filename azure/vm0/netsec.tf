@@ -80,7 +80,7 @@ resource "azurerm_network_security_rule" "tcp1883_src1" {
 # permit mqtt inspection oam ip2
 resource "azurerm_network_security_rule" "tcp1883_src2" {
   priority                    = 117
-  name                        = "tcp1883-mqtt_from_${var.ssh_src1name}"
+  name                        = "tcp1883-mqtt_from_${var.ssh_src2name}"
   source_address_prefix       = var.ssh_src2
   direction                   = "Inbound"
   access                      = "Allow"
