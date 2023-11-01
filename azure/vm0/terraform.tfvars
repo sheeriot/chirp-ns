@@ -1,5 +1,5 @@
 # note some variables are set in env.sh to ensure consistency between terraform components
-vm_name = "everychirp"
+vm_name = "vm0"
 vm_user = "kris"
 vm_size = "Standard_B2s"
 ssh_src1 = "76.250.81.157"
