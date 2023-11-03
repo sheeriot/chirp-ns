@@ -1,11 +1,11 @@
 #!/bin/bash
 # The Terraform Runner....
-# v0.11 - now use "apply or you get "plan" by default
+# v0.12
 
 # Pass three input variables - env_type (e.g. d#ev or prod) and component name (e.g. role or ecr)
-# if the third variable is plan or destroy it will run corresponding terraform action
+# if the third variable is apply or destroy it will run corresponding terraform action
 
-# check host folder match requested ENV Type
+# check requested folder (arg) matches current foldername
 foldername=${PWD##*/}
 
 if [ "$1" = "$foldername" ]; then
@@ -15,27 +15,30 @@ if [ "$1" = "$foldername" ]; then
     echo "Component: ${2}"
     echo "ENV_NAME: ${ENV_NAME}"
 
-    # normalize variables script named env.sh
+    # setup environment variables, INFRA_NAME, etc
     source ./env.sh
     
     # change to terraform component directory
     cd $COMPONENT
     
+    # This terraform_runner used for Azure
     terraform init -reconfigure \
     -backend-config="resource_group_name=${TFSTATE_RG}" \
     -backend-config="storage_account_name=${TFSTATE_ACCOUNT}" \
     -backend-config="container_name=${TFSTATE_CONTAINER}" \
     -backend-config="key=${INFRA_NAME}/${COMPONENT}"
 
+    # Use these for AWS deployments
     # -backend-config="region=${AWS_REGION}" \
     # -backend-config="bucket=${TFSTATE_BUCKETNAME}" \
     # -backend-config="key=${INFRA_NAME}/${COMPONENT}"
     
     echo "Workspace ENV_NAME: ${ENV_NAME}"
 
+    # creates a workspace if it doesn't exist and selects it
     if ! terraform workspace select ${ENV_NAME}; then terraform workspace new ${ENV_NAME}; fi
     
-    # terraform validate
+    # execute Terraform plan/apply/destroy
     echo "Now terraform plan/apply/destroy"
     if [ "${3}" = "apply" ]; then
         terraform apply -auto-approve
